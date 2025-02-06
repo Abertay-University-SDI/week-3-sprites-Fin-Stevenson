@@ -6,7 +6,8 @@
 #include "Framework/GameObject.h"
 #include <string.h>
 #include <iostream>
-
+#include "Player.h"
+#include "Camera.h"
 
 class Level : BaseLevel {
 public:
@@ -19,7 +20,12 @@ public:
 
 private:
 	// Level objects
-	GameObject testSprite;
+	Player* player;
+
+	GameObject bg;
 	sf::Texture texture;
+	bool view;
+	sf::View mView;
+	CameraFollow* mCameraFollow;
 
 };
