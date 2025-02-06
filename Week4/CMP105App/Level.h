@@ -24,8 +24,7 @@ private:
 
 	GameObject bg;
 	sf::Texture texture;
-	bool view;
-	sf::View mView;
+	
 	CameraFollow* mCameraFollow;
 
 };

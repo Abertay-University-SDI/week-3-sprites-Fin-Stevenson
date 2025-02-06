@@ -12,5 +12,6 @@ public:
 
 private:
     sf::Vector2f mSpeed = sf::Vector2f(0,0);
+    float maxSpeed = 100.0f;
 };
 

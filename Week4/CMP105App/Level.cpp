@@ -4,8 +4,6 @@ Level::Level(sf::RenderWindow* hwnd, Input* in)
 {
 	window = hwnd;
 	input = in;
-
-	mView = window->getView();
 	// initialise game objects
 	texture.loadFromFile("gfx/Mushroom.png");
 
@@ -29,19 +27,6 @@ void Level::handleInput(float dt)
 	{
 		window->close();
 	}
-
-	if (input->isPressed(sf::Keyboard::F))
-	{
-		std::cout << "Camera Shake  " << view << std::endl;
-		if (view)
-		{
-			view = false;
-		}
-		else
-		{
-			view = true;
-		}
-	}
 	player->handleInput(dt);
 }
 
@@ -49,7 +34,6 @@ void Level::handleInput(float dt)
 void Level::update(float dt)
 {
 	player->update(dt);
-	mView.move((player->getPosition() + (player->getSize() / 2.f)) * dt);
 	mCameraFollow->update(dt);
 }
 
@@ -57,14 +41,7 @@ void Level::update(float dt)
 void Level::render()
 {
 	beginDraw();
-	if (view)
-	{
-		window->setView(*mCameraFollow);
-	}
-	else
-	{
-		window->setView(mView);
-	}
+	window->setView(*mCameraFollow);
 	window->draw(bg);
 	window->draw(*player);
 	endDraw();
