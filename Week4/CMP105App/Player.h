@@ -10,8 +10,9 @@ public:
     void handleInput(float dt) override;
     void update(float dt) override;
 
+    sf::CircleShape getCircle() { return circle; }
 private:
-    sf::Vector2f mSpeed = sf::Vector2f(0,0);
-    float maxSpeed = 100.0f;
+    float maxSpeed = 50.0f;
+    sf::CircleShape circle;
 };
 

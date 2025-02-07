@@ -9,43 +9,63 @@ Player::Player(Input* in, sf::RenderWindow* wndw)
 
 	setSize(sf::Vector2f(100, 100));
 	setPosition(sf::Vector2f(100, 100));
-	mSpeed = sf::Vector2f(0, 0);
+	setFillColor(sf::Color::Red);
+
 }
 
 void Player::handleInput(float dt)
 {
 	if (input->isPressed(sf::Keyboard::W))
 	{
-		mSpeed.y -= maxSpeed;
+		setVelocity(getVelocity().x, getVelocity().y - maxSpeed);
 	}
 
 	if (input->isPressed(sf::Keyboard::S))
 	{
-		mSpeed.y += maxSpeed;
+		setVelocity(getVelocity().x, getVelocity().y + maxSpeed);
 	}
 
 	if (input->isPressed(sf::Keyboard::A))
 	{
-		mSpeed.x -= maxSpeed;
+		setVelocity(getVelocity().x - maxSpeed, getVelocity().y);
 	}
 
 	if (input->isPressed(sf::Keyboard::D))
 	{
-		mSpeed.x += maxSpeed;
+		setVelocity(getVelocity().x + maxSpeed, getVelocity().y);
+	}
+
+	if (input->isPressed(sf::Keyboard::K))
+	{
+		setVelocity(sf::Vector2f(0, 0));
 	}
 }
 
 void Player::update(float dt)
 {
-	move(mSpeed * dt);
-	
-	if (fabs(mSpeed.x) > 500.0f)
+	move(getVelocity() * dt);
+	circle.move(getVelocity() * dt);
+	if (fabs(getVelocity().x) > 500.0f)
 	{
-		mSpeed.x = 500.0f;
+		if (getVelocity().x < 0)
+		{
+			setVelocity(-500.0f, getVelocity().y);
+		}
+		else
+		{
+			setVelocity(500.0f, getVelocity().y);
+		}
 	}
 
-	if (fabs(mSpeed.y) > 500.0f)
+	if (fabs(getVelocity().y) > 500.0f)
 	{
-		mSpeed.y = 500.0f;
+		if (getVelocity().y < 0)
+		{
+			setVelocity(getVelocity().x, -500.0f);
+		}
+		else
+		{
+			setVelocity(getVelocity().x, 500.0f);
+		}
 	}
 }

@@ -8,6 +8,7 @@
 #include <iostream>
 #include "Player.h"
 #include "Camera.h"
+#include "TileMap.h"
 
 class Level : BaseLevel {
 public:
@@ -21,7 +22,8 @@ public:
 private:
 	// Level objects
 	Player* player;
-
+	sf::Vertex point;
+	
 	GameObject bg;
 	sf::Texture texture;
 	

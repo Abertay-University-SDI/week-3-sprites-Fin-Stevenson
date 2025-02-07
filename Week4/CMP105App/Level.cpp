@@ -5,13 +5,14 @@ Level::Level(sf::RenderWindow* hwnd, Input* in)
 	window = hwnd;
 	input = in;
 	// initialise game objects
-	texture.loadFromFile("gfx/Mushroom.png");
-
+	texture.loadFromFile("gfx/Checkerboard.png");
+	texture.setRepeated(true);
 	bg.setTexture(&texture);
-	bg.setSize(sf::Vector2f(1100, 1100));
-
+	bg.setTextureRect(sf::IntRect(-2400, -2400, 2400, 2400));
+	bg.setSize(sf::Vector2f(10000.f, 10000.f));
 	player = new Player(input, window);
 	mCameraFollow = new CameraFollow(window, player);
+	point.color = sf::Color::Green;
 }
 
 Level::~Level()
@@ -35,6 +36,7 @@ void Level::update(float dt)
 {
 	player->update(dt);
 	mCameraFollow->update(dt);
+	point.position = mCameraFollow->getCenter();
 }
 
 // Render level
@@ -43,6 +45,8 @@ void Level::render()
 	beginDraw();
 	window->setView(*mCameraFollow);
 	window->draw(bg);
+	window->draw(player->getCircle());
 	window->draw(*player);
+	window->draw(&point, 1, sf::Points);
 	endDraw();
 }

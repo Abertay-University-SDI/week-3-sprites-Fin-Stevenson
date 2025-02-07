@@ -16,11 +16,13 @@ GameObject::~GameObject()
 // Override this function to provide input handling for the derived class
 void GameObject::handleInput(float dt)
 {
+
 }
 
 // override this function to provide functionality
 void GameObject::update(float dt)
 {
+
 }
 
 // Sets the velocity of the sprite

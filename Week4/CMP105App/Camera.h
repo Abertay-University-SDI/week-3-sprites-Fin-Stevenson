@@ -12,5 +12,7 @@ private:
 	sf::RenderWindow* mWindow;
 	GameObject* mGameObject;
 	sf::Vector2f mGameObjCenter;
+
+	float maxDist[2];
 };
 
